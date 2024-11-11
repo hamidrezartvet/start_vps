@@ -4,9 +4,6 @@ sudo apt update && sudo apt upgrade -y
 #here we install apache2
 sudo apt install apache2 -y
 
-#clear
-clear
-
 #then we change apache2 folder access
 sudo chmod -R 755 /var/www
 sudo mkdir -p /var/www/your_domain_1/public_html
