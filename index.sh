@@ -22,3 +22,7 @@ sudo apt-get install libapache2-mod-php8.2 -y
 sudo a2enmod php8.2
 sudo update-alternatives --set php /usr/bin/php8.2
 sudo service apache2 restart
+
+#install getit and nano
+sudo apt install nano -y
+sudo apt install gedit -y
