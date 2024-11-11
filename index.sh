@@ -13,9 +13,6 @@ sudo chown -R $USER:$USER /var/www/your_domain_1/public_html
 sudo systemctl reload apache2
 sudo systemctl restart apache2
 
-#here we get apache2 status
-sudo systemctl status apache2
-
 #here we install php
 sudo add-apt-repository ppa:ondrej/php
 sudo apt update
