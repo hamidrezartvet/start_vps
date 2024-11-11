@@ -5,7 +5,7 @@ sudo apt update && sudo apt upgrade -y
 sudo apt install apache2 -y
 
 #clear
-clear 
+clear
 
 #then we change apache2 folder access
 sudo chmod -R 755 /var/www
