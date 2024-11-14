@@ -49,5 +49,8 @@
 	$days  = $num;
 	$system_usage['UPTIME'] = 'days:'.$days;
 
+	$system_usage['online_users'] = shell_exec('sh getOnlineUsers.sh');
+
+
 	echo json_encode($system_usage);
 ?>
