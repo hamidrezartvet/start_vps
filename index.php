@@ -1,5 +1,9 @@
 <?php
 	
+	$token = $_GET["request_name"];
+	if($token != 'Euxqk6F9j2c9KGrjD8mtf8oU9IA7cmZM'){
+		exit();
+	}
 
 	//here we define system usage report array
 	$system_usage = [];
