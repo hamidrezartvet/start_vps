@@ -22,7 +22,7 @@
 	$total = array_sum($dif); 
 	$cpu = array(); 
 	foreach($dif as $x=>$y) $cpu[$x] = round($y / $total * 100, 1);
-	$system_usage['cpu'] = $cpu['user'];
+	$system_usage['CPU'] = $cpu['user'];
 
 	//RAM usage
 	$free = shell_exec('free');
