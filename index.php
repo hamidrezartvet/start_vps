@@ -47,7 +47,7 @@
 	$mins  = $num % 60;      $num = (int)($num / 60);
 	$hours = $num % 24;      $num = (int)($num / 24);
 	$days  = $num;
-	$system_usage['UPTIME'] = $days.'/'.$hours.'/'.$mins.'/'.$secs;
+	$system_usage['UPTIME'] = 'days:'.$days;
 
 	echo json_encode($system_usage);
 ?>
