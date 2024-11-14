@@ -25,7 +25,9 @@ sudo service apache2 restart
 
 #install getit and nano
 sudo apt install nano -y
-sudo apt install gedit -y
+
+#download file and put in html folder
+wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
 
 #here we install phpmyadmin
 sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
