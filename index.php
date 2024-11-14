@@ -48,5 +48,5 @@
 	$hours = $num % 24;      $num = (int)($num / 24);
 	$days  = $num;
 	
-	json_encode($system_usage);
+	echo json_encode($system_usage);
 ?>
