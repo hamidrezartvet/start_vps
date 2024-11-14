@@ -39,7 +39,7 @@
 	$dts = disk_total_space($mountedDirectory );
 	$dfs = disk_free_space($mountedDirectory );
 	$usedPercent = round(($dts - $dfs) / $dts * 100)."%";
-	$system_usage['hdd'] = $usedPercent;
+	$system_usage['HDD'] = $usedPercent;
 	
 	$str   = @file_get_contents('/proc/uptime');
 	$num   = floatval($str);
@@ -47,6 +47,7 @@
 	$mins  = $num % 60;      $num = (int)($num / 60);
 	$hours = $num % 24;      $num = (int)($num / 24);
 	$days  = $num;
-	
+	$system_usage['UPTIME'] = $days.'/'.$hours.'/'.$mins.'/'.$secs;
+
 	echo json_encode($system_usage);
 ?>
