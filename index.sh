@@ -25,6 +25,7 @@ sudo service apache2 restart
 
 #install getit and nano
 sudo apt install nano -y
+sudo apt install gedit -y
 
 #here we install phpmyadmin
 sudo apt install phpmyadmin php-mbstring php-zip php-gd php-json php-curl
