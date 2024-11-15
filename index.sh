@@ -30,3 +30,4 @@ sudo apt install nano -y
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/getOnlineUsers.sh"
+wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/firewall.txt"
