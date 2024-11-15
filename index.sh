@@ -10,13 +10,13 @@ sudo mkdir -p /var/www/your_domain_1/public_html
 sudo chown -R $USER:$USER /var/www/your_domain_1/public_html
 
 #here we install php
-sudo add-apt-repository ppa:ondrej/php
+sudo add-apt-repository ppa:ondrej/php -y
 sudo apt update
 sudo apt install php8.2 -y
 sudo apt-get install -y php8.2-cli php8.2-common php8.2-fpm php8.2-mysql php8.2-zip php8.2-gd php8.2-mbstring php8.2-curl php8.2-xml php8.2-bcmath
 sudo apt-get install libapache2-mod-php8.2 -y
 sudo a2enmod php8.2
-sudo update-alternatives --set php /usr/bin/php8.2
+sudo update-alternatives --set php /usr/bin/php8.2 -y
 sudo service apache2 restart
 
 #install getit and nano
@@ -42,3 +42,6 @@ else
     echo "File does not exist."
 fi
 echo 'ip list blocked!';
+
+#at the end we reboot server
+sudo reboot
