@@ -29,19 +29,19 @@ wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_v
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/firewall.txt"
 
 
-#here we install iptables
-sudo apt-get install iptables
+# #here we install iptables
+# sudo apt-get install iptables
 
-#then we ban ip list
-if [ -f "/var/www/html/firewall.txt" ]; then
-    for IP in $(cat /var/www/html/firewall.txt); do iptables -A INPUT -s $IP/32 -d 0/0 -j DROP; done
-    echo "File exists."
-else
-    wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/firewall.txt"
-    for IP in $(cat /var/www/html/firewall.txt); do iptables -A INPUT -s $IP/32 -d 0/0 -j DROP; done
-    echo "File does not exist."
-fi
-echo 'ip list blocked!';
+# #then we ban ip list
+# if [ -f "/var/www/html/firewall.txt" ]; then
+#     for IP in $(cat /var/www/html/firewall.txt); do iptables -A INPUT -s $IP/32 -d 0/0 -j DROP; done
+#     echo "File exists."
+# else
+#     wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/firewall.txt"
+#     for IP in $(cat /var/www/html/firewall.txt); do iptables -A INPUT -s $IP/32 -d 0/0 -j DROP; done
+#     echo "File does not exist."
+# fi
+# echo 'ip list blocked!';
 
 #at the end we reboot server
 sudo reboot
