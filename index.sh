@@ -41,7 +41,7 @@ sudo sysctl -p
 sudo sysctl net.ipv4.tcp_congestion_control
 
 #here we install fai2ban for protection
-sudo apt install fail2ban
+sudo apt install fail2ban -y
 sudo systemctl start fail2ban
 sudo systemctl enable fail2ban
 
