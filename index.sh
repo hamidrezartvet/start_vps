@@ -44,17 +44,35 @@
 # echo 'ip list blocked!';
 
 #here we set bbr for data performance
-echo 'net.ipv4.tcp_window_scaling = 1' >> /etc/sysctl.conf
-echo 'net.core.rmem_max = 16777216' >> /etc/sysctl.conf
-echo 'net.core.wmem_max = 16777216' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_rmem = 4096 87380 16777216' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_wmem = 4096 16384 16777216' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_low_latency = 1' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_slow_start_after_idle = 0' >> /etc/sysctl.conf
-echo 'net.core.default_qdisc = fq' >> /etc/sysctl.conf
-echo 'net.ipv4.tcp_congestion_control = bbr' >> /etc/sysctl.conf
-sysctl -p
-sysctl net.ipv4.tcp_congestion_control
+# sudo echo 'net.ipv4.tcp_window_scaling = 1' >> /etc/sysctl.conf
+# sudo echo 'net.core.rmem_max = 16777216' >> /etc/sysctl.conf
+# sudo echo 'net.core.wmem_max = 16777216' >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_rmem = 4096 87380 16777216' >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_wmem = 4096 16384 16777216' >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_low_latency = 1' >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_slow_start_after_idle = 0' >> /etc/sysctl.conf
+# sudo echo 'net.core.default_qdisc = fq' >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_congestion_control = bbr' >> /etc/sysctl.conf
+# sudo sysctl -p
+# sudo sysctl net.ipv4.tcp_congestion_control
+
+
+#here we block iran ip
+sudo apt-get install curl unzip perl xtables-addons-common libtext-csv-xs-perl libmoosex-types-netaddr-ip-perl iptables-persistent -y 
+
+url="https://raw.githubusercontent.com/HamedAp/Ssh-User-management/main/i.txt"
+allcount=$(curl -s "$url" | wc -l)
+curl -s "$url"  | while IFS= read -r line; do
+((++line_number))
+iptables -A OUTPUT -p tcp  --dport 80 -d $line -j DROP
+iptables -A OUTPUT -p tcp  --dport 443 -d $line -j DROP
+clear
+echo "Iran IP Blocking ( List 1 ) : $line_number / $allcount "
+done
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
+
+
+
 
 
 
