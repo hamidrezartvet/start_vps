@@ -53,7 +53,6 @@ net.ipv4.tcp_low_latency = 1
 net.ipv4.tcp_slow_start_after_idle = 0
 net.core.default_qdisc = fq
 net.ipv4.tcp_congestion_control = bbr" >> /etc/sysctl.conf
-fi
 
-#at the end we reboot server
-sudo reboot
+# #at the end we reboot server
+# sudo reboot
