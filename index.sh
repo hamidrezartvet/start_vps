@@ -26,22 +26,6 @@ sudo apt install nano -y
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/getOnlineUsers.sh"
-wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/i.txt"
-
-#here we block iran ip
-sudo apt-get install curl unzip perl xtables-addons-common libtext-csv-xs-perl libmoosex-types-netaddr-ip-perl iptables-persistent -y 
-
-url="https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/i.txt"
-allcount=$(curl -s "$url" | wc -l)
-curl -s "$url"  | while IFS= read -r line; do
-((++line_number))
-iptables -A OUTPUT -p tcp  --dport 80 -d $line -j DROP
-iptables -A OUTPUT -p tcp  --dport 443 -d $line -j DROP
-clear
-echo "Iran IP Blocking ( List 1 ) : $line_number / $allcount "
-done
-sudo iptables-save | sudo tee /etc/iptables/rules.v4
-echo 'Iran ip blocked!'
 
 #here we set bbr for data performance
 sudo echo 'net.ipv4.tcp_window_scaling = 1' >> /etc/sysctl.conf
@@ -55,6 +39,11 @@ sudo echo 'net.core.default_qdisc = fq' >> /etc/sysctl.conf
 sudo echo 'net.ipv4.tcp_congestion_control = bbr' >> /etc/sysctl.conf
 sudo sysctl -p
 sudo sysctl net.ipv4.tcp_congestion_control
+
+#here we install fai2ban for protection
+sudo apt install fail2ban
+sudo systemctl start fail2ban
+sudo systemctl enable fail2ban
 
 # #at the end we reboot server
 sudo reboot
