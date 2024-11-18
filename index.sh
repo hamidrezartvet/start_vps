@@ -18,14 +18,20 @@ sudo apt-get install libapache2-mod-php8.2 -y
 sudo a2enmod php8.2
 sudo update-alternatives --set php /usr/bin/php8.2 -y
 sudo service apache2 restart
+clear
+echo '<<<<apache and php installed installed!>>>>'
 
 #install getit and nano
 sudo apt install nano -y
+clear
+echo '<<<<nano installed!>>>>'
 
 #download file and put in html folder
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/getOnlineUsers.sh"
+clear
+echo '<<<<necessary files downloaded!>>>>'
 
 #here we set bbr for data performance
 sudo echo 'net.ipv4.tcp_window_scaling = 1' >> /etc/sysctl.conf
@@ -39,11 +45,15 @@ sudo echo 'net.core.default_qdisc = fq' >> /etc/sysctl.conf
 sudo echo 'net.ipv4.tcp_congestion_control = bbr' >> /etc/sysctl.conf
 sudo sysctl -p
 sudo sysctl net.ipv4.tcp_congestion_control
+clear
+echo '<<<<ssh setting updated!>>>>'
 
 #here we install fai2ban for protection
 sudo apt install fail2ban -y
 sudo systemctl start fail2ban
 sudo systemctl enable fail2ban
+clear
+echo '<<<<fail2ban installed!>>>>'
 
 #here we install udpport
 udpport=8400
@@ -72,6 +82,8 @@ ENDOFFILE
 useradd -m videocall
 systemctl enable videocall
 systemctl start videocall
+clear
+echo '<<<<voice call installed!>>>>'
 
 # #at the end we reboot server
 sudo reboot
