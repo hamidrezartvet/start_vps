@@ -46,9 +46,7 @@ sudo systemctl start fail2ban
 sudo systemctl enable fail2ban
 
 #here we install udpport
-clear
 udpport=8400
-
 sudo apt update -y
 sudo apt install git cmake -y
 git clone https://github.com/ambrop72/badvpn.git /root/badvpn
@@ -76,4 +74,4 @@ systemctl enable videocall
 systemctl start videocall
 
 # #at the end we reboot server
-# sudo reboot
+sudo reboot
