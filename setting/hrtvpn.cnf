@@ -1,0 +1,2 @@
+/etc/hrtvpn/hrtvpn.cnf:
+api_url="http://auth.notefinderstack.cfd/auth/index.php"
