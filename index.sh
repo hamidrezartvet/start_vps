@@ -30,7 +30,7 @@ wget  -O    /etc/hrtvpn "https://raw.githubusercontent.com/hamidrezartvet/start_
 
 #PAM setting files
 sudo  rm -r /etc/pam.d/sshd
-sudo  rm -r /etc/sshd/sshd_config
+sudo  rm -r /etc/ssh/sshd_config
 wget  -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd"
 wget  -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd_config"
 wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
