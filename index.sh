@@ -96,7 +96,9 @@ clear
 echo '<<<<voice call installed!>>>>'
 
 #here we install package for syncing users
+echo '<<<<jq installation start>>>>'
 sudo apt-get install jq -y
+echo '<<<<jq installation finished>>>>'
 
 # #at the end we reboot server
 sudo reboot
