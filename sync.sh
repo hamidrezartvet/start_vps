@@ -1,4 +1,5 @@
 #!/bin/bash
+
 # Load configuration file for server URL and token
 CONFIG_FILE="/etc/hrtvpn.conf"
 
@@ -13,12 +14,15 @@ source "$CONFIG_FILE"
 
 # Ensure the MAIN_SERVER_URL and TOKEN are set
 if [[ -z "$MAIN_SERVER_URL" || -z "$TOKEN" ]]; then
-    echo "MAINSERVER_URL or TOKEN is not set in $CONFIG_FILE"
+    echo "MAIN_SERVER_URL or TOKEN is not set in $CONFIG_FILE"
     exit 1
 fi
 
-# Fetch the users list using curl with the token
-response=$(curl -s -H "Authorization: Bearer $TOKEN" "$MAIN_SERVER_URL")
+# Construct the full URL with the token
+FULL_URL="${MAIN_SERVER_URL}/${TOKEN}"
+
+# Fetch the users list using curl
+response=$(curl -s "$FULL_URL")
 
 # Parse the response and check if it contains valid data
 if [[ $(echo "$response" | jq '. | length') -eq 0 ]]; then
