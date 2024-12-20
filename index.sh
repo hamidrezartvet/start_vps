@@ -98,7 +98,5 @@ echo '<<<<voice call installed!>>>>'
 #here we install package for syncing users
 sudo apt-get install jq -y
 
-sudo systemctl status ssh
-
 # #at the end we reboot server
 sudo reboot
