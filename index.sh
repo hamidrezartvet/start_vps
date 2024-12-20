@@ -30,8 +30,8 @@ sudo  mkdir /etc/hrtvpn
 wget  -O    /etc/hrtvpn "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/hrtvpn.txt"
 
 #PAM setting files
-sudo nano rm -r /etc/pam.d/sshd
-sudo nano rm -r /etc/sshd/sshd_config
+sudo  rm -r /etc/pam.d/sshd
+sudo  rm -r /etc/sshd/sshd_config
 wget  -O /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd"
 wget  -O /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd_config"
 wget  -O /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
