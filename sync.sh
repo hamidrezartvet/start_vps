@@ -25,9 +25,50 @@ if ! cat "$RESPONSE_FILE" | jq . > /dev/null 2>&1; then
     exit 1
 fi
 
-# Display the parsed JSON
-echo "Parsed JSON:"
-cat "$RESPONSE_FILE" | jq .
+# Parse the JSON and extract users
+users=$(cat "$RESPONSE_FILE" | jq -c '.[]')
 
-# Additional processing could go here if needed
-echo "Script execution completed successfully."
+# Check if the response contains users
+if [[ -z "$users" ]]; then
+    echo "No users found in the response."
+    exit 0
+fi
+
+# Ensure the group `hrtvpn_users` exists
+GROUP_NAME="hrtvpn_users"
+if ! getent group "$GROUP_NAME" > /dev/null 2>&1; then
+    echo "Creating group: $GROUP_NAME"
+    sudo groupadd "$GROUP_NAME"
+else
+    echo "Group $GROUP_NAME already exists."
+fi
+
+# Add each user from the JSON response
+echo "Adding users..."
+for user in $users; do
+    # Extract username and password from JSON
+    username=$(echo "$user" | jq -r '.username')
+    password=$(echo "$user" | jq -r '.password')
+
+    # Skip if username or password is empty
+    if [[ -z "$username" || -z "$password" ]]; then
+        echo "Skipping invalid user entry: $user"
+        continue
+    fi
+
+    # Add the user to the system
+    echo "Adding user: $username"
+    if id "$username" > /dev/null 2>&1; then
+        echo "User $username already exists. Skipping..."
+        continue
+    fi
+
+    sudo useradd "$username" -m -G "$GROUP_NAME" -d "/home/hrtvpn_users/$username" -s /bin/true
+
+    # Set the user's password
+    echo "$username:$password" | sudo chpasswd
+
+    echo "User $username added successfully."
+done
+
+echo "All users processed."
