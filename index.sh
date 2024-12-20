@@ -22,23 +22,24 @@ clear
 echo '<<<<apache and php installed installed!>>>>'
 
 #download file and put in html folder
-wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
-wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
+wget  -O -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
+wget  -O -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
 
 #here we have importing setting
 sudo  mkdir /etc/hrtvpn
-wget  -P    /etc/hrtvpn "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/hrtvpn.txt"
+wget  -O -P    /etc/hrtvpn "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/hrtvpn.txt"
 
 #PAM setting files
-wget  -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/sshd"
-wget  -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/sshd_config"
-wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/pam_hrtvpn_backend.so"
-sudo chmod 644 /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
-sudo chown root:root /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
+wget  -O -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd"
+wget  -O -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd_config"
+wget  -O -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
+sudo  chmod 644 /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
+sudo  chown root:root /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
 sudo  mkdir /var/www/banner
-wget  -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/magicpc.txt"
-wget  -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/banner.txt"
-wget  -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/banner.conf"
+wget -O -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/magicpc.txt"
+wget -O -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
+wget -O -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
+sudo systemctl status ssh
 
 clear
 echo '<<<<necessary files downloaded!>>>>'
