@@ -21,8 +21,8 @@ sudo service apache2 restart
 echo '<<<<apache and php installed installed!>>>>'
 
 #download file and put in html folder
-wget  -O /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
-wget  -O /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
+wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
+wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
 
 #here we have importing setting
 sudo  mkdir /etc/hrtvpn
