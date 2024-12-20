@@ -95,5 +95,8 @@ systemctl start videocall
 clear
 echo '<<<<voice call installed!>>>>'
 
+#here we install package for syncing users
+sudo apt-get install jq -y
+
 # #at the end we reboot server
 sudo reboot

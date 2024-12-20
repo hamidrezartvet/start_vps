@@ -1,10 +1,24 @@
 #!/bin/bash
-sudo apt-get install jq -y
+# Load configuration file for server URL and token
+CONFIG_FILE="/etc/hrtvpn.conf"
 
-source /etc/hrtvpn.conf
+# Check if configuration file exists
+if [[ ! -f "$CONFIG_FILE" ]]; then
+    echo "Configuration file not found: $CONFIG_FILE"
+    exit 1
+fi
 
-# Fetch the users list using curl
-response=$(curl -s "$MAIN_SERVER_URL")
+# Source configuration file
+source "$CONFIG_FILE"
+
+# Ensure the MAIN_SERVER_URL and TOKEN are set
+if [[ -z "$MAIN_SERVER_URL" || -z "$TOKEN" ]]; then
+    echo "MAINSERVER_URL or TOKEN is not set in $CONFIG_FILE"
+    exit 1
+fi
+
+# Fetch the users list using curl with the token
+response=$(curl -s -H "Authorization: Bearer $TOKEN" "$MAIN_SERVER_URL")
 
 # Parse the response and check if it contains valid data
 if [[ $(echo "$response" | jq '. | length') -eq 0 ]]; then
