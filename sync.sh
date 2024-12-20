@@ -1,8 +1,7 @@
 #!/bin/bash
 sudo apt-get install jq -y
 
-# Define the URL to fetch the users list
-MAIN_SERVER_URL="http://dashbord.notefinderstack.cfd/api/get_users"
+source /etc/hrtvpn.conf
 
 # Fetch the users list using curl
 response=$(curl -s "$MAIN_SERVER_URL")

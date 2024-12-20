@@ -3,6 +3,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/hamidrezartvet/start_vps/maste
   
 ban  
 bash <(curl -Ls https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ban.sh --ipv4)  
-  
+
+upload  
+
 sync users  
 bash <(curl -Ls https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sync.sh --ipv4)  
