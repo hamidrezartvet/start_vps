@@ -39,7 +39,6 @@ sudo  mkdir /var/www/banner
 wget -O -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/magicpc.txt"
 wget -O -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
 wget -O -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
-sudo systemctl status ssh
 
 clear
 echo '<<<<necessary files downloaded!>>>>'
@@ -98,6 +97,8 @@ echo '<<<<voice call installed!>>>>'
 
 #here we install package for syncing users
 sudo apt-get install jq -y
+
+sudo systemctl status ssh
 
 # #at the end we reboot server
 sudo reboot
