@@ -6,8 +6,8 @@ sudo apt install apache2 -y
 
 #then we change apache2 folder access
 sudo chmod -R 755 /var/www
-sudo mkdir -p /var/www/your_domain_1/public_html
-sudo chown -R $USER:$USER /var/www/your_domain_1/public_html
+sudo mkdir -p /var/www/html
+sudo chown -R $USER:$USER /var/www/html
 
 #here we install php
 sudo add-apt-repository ppa:ondrej/php
@@ -21,49 +21,38 @@ sudo service apache2 restart
 clear
 echo '<<<<apache and php installed installed!>>>>'
 
-#install getit and nano
-sudo apt install nano -y
-clear
-echo '<<<<nano installed!>>>>'
-
 #download file and put in html folder
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
-wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/getOnlineUsers.sh"
 
 #here we have importing setting
 sudo  mkdir /etc/hrtvpn
-wget  -P    /etc/hrtvpn "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/hrtvpn.txt"
+wget  -P    /etc/hrtvpn "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/hrtvpn.txt"
 
 #PAM setting files
-wget  -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd"
-wget  -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd_config"
-wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
-
+wget  -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/sshd"
+wget  -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/sshd_config"
+wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/pam_hrtvpn_backend.so"
 sudo chmod 644 /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
 sudo chown root:root /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
-
 sudo  mkdir /var/www/banner
-wget  -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/magicpc.txt"
-wget  -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
-wget  -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
-
-
-
+wget  -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/magicpc.txt"
+wget  -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/banner.txt"
+wget  -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/setting/banner.conf"
 
 clear
 echo '<<<<necessary files downloaded!>>>>'
 
 #here we set bbr for data performance
-sudo echo 'net.ipv4.tcp_window_scaling = 1' >> /etc/sysctl.conf
-sudo echo 'net.core.rmem_max = 16777216' >> /etc/sysctl.conf
-sudo echo 'net.core.wmem_max = 16777216' >> /etc/sysctl.conf
+sudo echo 'net.ipv4.tcp_window_scaling = 1'         >> /etc/sysctl.conf
+sudo echo 'net.core.rmem_max = 16777216'            >> /etc/sysctl.conf
+sudo echo 'net.core.wmem_max = 16777216'            >> /etc/sysctl.conf
 sudo echo 'net.ipv4.tcp_rmem = 4096 87380 16777216' >> /etc/sysctl.conf
 sudo echo 'net.ipv4.tcp_wmem = 4096 16384 16777216' >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_low_latency = 1' >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_slow_start_after_idle = 0' >> /etc/sysctl.conf
-sudo echo 'net.core.default_qdisc = fq' >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_congestion_control = bbr' >> /etc/sysctl.conf
+sudo echo 'net.ipv4.tcp_low_latency = 1'            >> /etc/sysctl.conf
+sudo echo 'net.ipv4.tcp_slow_start_after_idle = 0'  >> /etc/sysctl.conf
+sudo echo 'net.core.default_qdisc = fq'             >> /etc/sysctl.conf
+sudo echo 'net.ipv4.tcp_congestion_control = bbr'   >> /etc/sysctl.conf
 sudo sysctl -p
 sudo sysctl net.ipv4.tcp_congestion_control
 clear
