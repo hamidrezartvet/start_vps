@@ -18,7 +18,6 @@ sudo apt-get install libapache2-mod-php8.2 -y
 sudo a2enmod php8.2
 sudo update-alternatives --set php /usr/bin/php8.2 -y
 sudo service apache2 restart
-clear
 echo '<<<<apache and php installed installed!>>>>'
 
 #download file and put in html folder
@@ -42,7 +41,6 @@ wget -O /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_
 wget -O /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
 wget -O /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
 
-clear
 echo '<<<<necessary files downloaded!>>>>'
 
 #here we set bbr for data performance
@@ -57,14 +55,12 @@ sudo echo 'net.core.default_qdisc = fq'             >> /etc/sysctl.conf
 sudo echo 'net.ipv4.tcp_congestion_control = bbr'   >> /etc/sysctl.conf
 sudo sysctl -p
 sudo sysctl net.ipv4.tcp_congestion_control
-clear
 echo '<<<<ssh setting updated!>>>>'
 
 #here we install fai2ban for protection
 sudo apt install fail2ban -y
 sudo systemctl start fail2ban
 sudo systemctl enable fail2ban
-clear
 echo '<<<<fail2ban installed!>>>>'
 
 #here we install udpport
@@ -94,7 +90,6 @@ ENDOFFILE
 useradd -m videocall
 systemctl enable videocall
 systemctl start videocall
-clear
 echo '<<<<voice call installed!>>>>'
 
 #here we install package for syncing users
