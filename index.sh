@@ -100,4 +100,4 @@ echo '<<<<jq installation finished>>>>'
 sudo systemctl restart ssh
 
 # #at the end we reboot server
-# sudo reboot
+sudo reboot
