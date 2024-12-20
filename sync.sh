@@ -21,21 +21,18 @@ fi
 # Construct the full URL with the token
 FULL_URL="${MAIN_SERVER_URL}/${TOKEN}"
 
-# Fetch the users list as encoded JSON using curl
-encoded_response=$(curl -s "$FULL_URL")
+# Fetch the users list using curl
+response=$(curl -s "$FULL_URL")
 
-# Check if the response is empty
-if [[ -z "$encoded_response" ]]; then
-    echo "Empty response from the server. Exiting."
+# Check if the response is valid JSON
+if ! echo "$response" | jq . > /dev/null 2>&1; then
+    echo "Invalid JSON response received. Exiting."
     exit 1
 fi
 
-# Decode the JSON (assuming it is base64 encoded)
-decoded_response=$(echo "$encoded_response" | base64 --decode)
-
-# Parse the decoded response and check if it contains valid data
-if [[ $(echo "$decoded_response" | jq '. | length') -eq 0 ]]; then
-    echo "No users found in the decoded response. Exiting."
+# Parse the response and check if it contains valid data
+if [[ $(echo "$response" | jq '. | length') -eq 0 ]]; then
+    echo "No users found in the response. Exiting."
     exit 1
 fi
 
@@ -49,7 +46,7 @@ else
 fi
 
 # Loop through the users and add them to the server
-echo "$decoded_response" | jq -c '.[]' | while read -r user; do
+echo "$response" | jq -c '.[]' | while read -r user; do
     username=$(echo "$user" | jq -r '.username')
     password=$(echo "$user" | jq -r '.password')
 
@@ -57,7 +54,7 @@ echo "$decoded_response" | jq -c '.[]' | while read -r user; do
         echo "User $username already exists. Skipping."
     else
         echo "Adding user $username..."
-        sudo useradd "$username" -m -G "$GROUP_NAME" -d /home/hrtvpn_users/ -s /bin/true
+        sudo useradd "$username" -m -G "$GROUP_NAME" -d /home/hrtvpn_users/magicpc -s /bin/true
         echo "$username:$password" | sudo chpasswd
         echo "User $username added successfully."
     fi
