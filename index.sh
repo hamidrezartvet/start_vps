@@ -26,7 +26,7 @@ wget  -O /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_v
 
 #here we have importing setting
 sudo  mkdir /etc/hrtvpn
-wget  -P    /etc/hrtvpn/hrtvpn.cnf "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/hrtvpn.cnf"
+wget  -P    /etc/hrtvpn/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/hrtvpn.cnf"
 
 #PAM setting files
 sudo  rm -r /etc/pam.d/sshd
