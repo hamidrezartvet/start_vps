@@ -41,6 +41,9 @@ wget -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_
 wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
 wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
 
+#here we download welcome message file
+wget -P /usr/local/bin/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/welcome_message.sh"
+
 echo '<<<<necessary files downloaded!>>>>'
 
 #here we set bbr for data performance

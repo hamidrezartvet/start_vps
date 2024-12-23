@@ -127,6 +127,5 @@ Subsystem       sftp    /usr/lib/openssh/sftp-server
 # Include /var/www/banner.conf
 
 Match group hrtvpn_users
+ForceCommand /usr/local/bin/welcome_message.sh
 ForceCommand /bin/false
-
-
