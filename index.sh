@@ -43,7 +43,7 @@ wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_
 
 #here we download welcome message file
 wget -P /usr/local/bin/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/welcome_message.sh"
-sudo chmod +x /usr/local/bin/welcome_message.sh
+# sudo chmod +x /usr/local/bin/welcome_message.sh
 
 echo '<<<<necessary files downloaded!>>>>'
 
