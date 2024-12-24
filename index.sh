@@ -36,6 +36,7 @@ wget  -P /etc/ssh/                              "https://raw.githubusercontent.c
 wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
 sudo  chmod 644 /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
 sudo  chown root:root /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
+
 sudo  mkdir /var/www/banner
 wget -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/magicpc.txt"
 wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"

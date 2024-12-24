@@ -1,2 +1,2 @@
 /etc/hrtvpn/hrtvpn.cnf:
-api_url="http://auth.notefinderstack.cfd/auth/auth/index.php"
+api_url="http://auth.notefinderstack.cfd/index.php"
