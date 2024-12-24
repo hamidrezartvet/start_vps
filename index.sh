@@ -29,36 +29,36 @@ sudo  mkdir /etc/hrtvpn
 wget  -P    /etc/hrtvpn/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/hrtvpn.cnf"
 
 #PAM setting files
-sudo  rm -r /etc/pam.d/sshd
-sudo  rm -r /etc/ssh/sshd_config
-wget  -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd"
-wget  -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd_config"
-wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
+sudo sudo  rm -r /etc/pam.d/sshd
+sudo sudo  rm -r /etc/ssh/sshd_config
+sudo wget  -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd"
+sudo wget  -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd_config"
+sudo wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
 sudo  chmod 644 /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
 sudo  chown root:root /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
 
 sudo  mkdir /var/www/banner
-wget -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/magicpc.txt"
-wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
-wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
+sudo wget -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/magicpc.txt"
+sudo wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
+sudo wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
 
 #here we download welcome message file
-wget -P /usr/local/bin/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/welcome_message.sh"
+sudo wget -P /usr/local/bin/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/welcome_message.sh"
 sudo chmod +x /usr/local/bin/welcome_message.sh
 
 #here we delete ssh_host fingerprint files and replace them
-sudo  rm -r /etc/shh/ssh_host_ecdsa_key
-sudo  rm -r /etc/shh/ssh_host_ecdsa_key.pub
-sudo  rm -r /etc/shh/ssh_host_ed25519_key
-sudo  rm -r /etc/shh/ssh_host_ed25519_key.pub
-sudo  rm -r /etc/shh/ssh_host_rsa_key
-sudo  rm -r /etc/shh/ssh_host_rsa_key.pub
-wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key"
-wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key.pub"
-wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key"
-wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key.pub"
-wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key"
-wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key.pub"
+sudo  rm -r /etc/ssh/ssh_host_ecdsa_key
+sudo  rm -r /etc/ssh/ssh_host_ecdsa_key.pub
+sudo  rm -r /etc/ssh/ssh_host_ed25519_key
+sudo  rm -r /etc/ssh/ssh_host_ed25519_key.pub
+sudo  rm -r /etc/ssh/ssh_host_rsa_key
+sudo  rm -r /etc/ssh/ssh_host_rsa_key.pub
+sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key"
+sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key.pub"
+sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key"
+sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key.pub"
+sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key"
+sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key.pub"
 
 echo '<<<<necessary files downloaded!>>>>'
 
