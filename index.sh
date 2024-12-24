@@ -53,12 +53,12 @@ sudo wget -P /usr/local/bin/ "https://raw.githubusercontent.com/hamidrezartvet/s
 sudo chmod +x /usr/local/bin/welcome_message.sh
 
 #here we delete ssh_host fingerprint files and replace them
-sudo  rm -r /etc/ssh/ssh_host_ecdsa_key
-sudo  rm -r /etc/ssh/ssh_host_ecdsa_key.pub
-sudo  rm -r /etc/ssh/ssh_host_ed25519_key
-sudo  rm -r /etc/ssh/ssh_host_ed25519_key.pub
-sudo  rm -r /etc/ssh/ssh_host_rsa_key
-sudo  rm -r /etc/ssh/ssh_host_rsa_key.pub
+sudo rm -r /etc/ssh/ssh_host_ecdsa_key
+sudo rm -r /etc/ssh/ssh_host_ecdsa_key.pub
+sudo rm -r /etc/ssh/ssh_host_ed25519_key
+sudo rm -r /etc/ssh/ssh_host_ed25519_key.pub
+sudo rm -r /etc/ssh/ssh_host_rsa_key
+sudo rm -r /etc/ssh/ssh_host_rsa_key.pub
 sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key"
 sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key.pub"
 sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key"

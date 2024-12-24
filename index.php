@@ -49,20 +49,19 @@
 	$days  = $num;
 	$system_usage['UPTIME'] = 'days:'.$days;
 
-
 	// Execute the 'who' command to get logged-in users
 	$output = [];
-	exec("who | grep -i 'pts/' | wc -l", $output, $returnVar);
-
+	exec("last | grep 'still logged in' | wc -l", $output, $returnVar);
+   
 	// Check if the command executed successfully
 	if ($returnVar !== 0) {
-
-		//here we return error message
-		$system_usage['ONLINE_USERS'] = "Error fetching SSH users.";
+   
+	 //here we return error message
+	 $system_usage['ONLINE_USERS'] = "Error fetching SSH users.";
 	}else{
-
-		//here we return online ssh online users in the system
-		$system_usage['ONLINE_USERS'] = intval($output[0]);
+   
+	 //here we return online ssh online users in the system
+	 $system_usage['ONLINE_USERS'] = intval($output[0]);
 	}
 
 	echo json_encode($system_usage);
