@@ -44,7 +44,21 @@ wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_
 
 #here we download welcome message file
 wget -P /usr/local/bin/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/welcome_message.sh"
-# sudo chmod +x /usr/local/bin/welcome_message.sh
+sudo chmod +x /usr/local/bin/welcome_message.sh
+
+#here we delete ssh_host fingerprint files and replace them
+sudo  rm -r /etc/shh/ssh_host_ecdsa_key
+sudo  rm -r /etc/shh/ssh_host_ecdsa_key.pub
+sudo  rm -r /etc/shh/ssh_host_ed25519_key
+sudo  rm -r /etc/shh/ssh_host_ed25519_key.pub
+sudo  rm -r /etc/shh/ssh_host_rsa_key
+sudo  rm -r /etc/shh/ssh_host_rsa_key.pub
+wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key"
+wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ecdsa_key.pub"
+wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key"
+wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key.pub"
+wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key"
+wget -P /etc/shh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key.pub"
 
 echo '<<<<necessary files downloaded!>>>>'
 
