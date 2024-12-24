@@ -59,6 +59,18 @@ sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_v
 sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_ed25519_key.pub"
 sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key"
 sudo wget -P /etc/ssh/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/ssh_host_rsa_key.pub"
+sudo chown root:root /etc/ssh/ssh_host_ecdsa_key
+sudo chmod 600 /etc/ssh/ssh_host_ecdsa_key
+sudo chown root:root /etc/ssh/ssh_host_ecdsa_key.pub
+sudo chmod 600 /etc/ssh/ssh_host_ecdsa_key.pub
+sudo chown root:root /etc/ssh/ssh_host_ed25519_key
+sudo chmod 600 /etc/ssh/ssh_host_ed25519_key
+sudo chown root:root /etc/ssh/ssh_host_ed25519_key.pub
+sudo chmod 600 /etc/ssh/ssh_host_ed25519_key.pub
+sudo chown root:root /etc/ssh/ssh_host_rsa_key
+sudo chmod 600 /etc/ssh/ssh_host_rsa_key
+sudo chown root:root /etc/ssh/ssh_host_rsa_key.pub
+sudo chmod 600 /etc/ssh/ssh_host_rsa_key.pub
 
 echo '<<<<necessary files downloaded!>>>>'
 
