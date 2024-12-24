@@ -101,7 +101,6 @@ Compression yes
 ClientAliveInterval 30
 ClientAliveCountMax 0
 UseDNS no
-TCPRcvBufPoll yes
 HostKeyAlgorithms ssh-ed25519,ecdsa-sha2-nistp256
 Ciphers aes128-ctr,aes192-ctr,aes256-ctr
 KexAlgorithms diffie-hellman-group14-sha256
