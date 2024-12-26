@@ -49,20 +49,48 @@
 	$days  = $num;
 	$system_usage['UPTIME'] = 'days:'.$days;
 
-	// Execute the 'who' command to get logged-in users
-	$output = [];
-	exec("last | grep 'still logged in' | wc -l", $output, $returnVar);
+	// // Execute the 'who' command to get logged-in users
+	// $output = [];
+	// exec("last | grep 'still logged in' | wc -l", $output, $returnVar);
    
+	// // Check if the command executed successfully
+	// if ($returnVar !== 0) {
+   
+	//  //here we return error message
+	//  $system_usage['ONLINE_USERS'] = "Error fetching SSH users.";
+	// }else{
+   
+	//  //here we return online ssh online users in the system
+	//  $system_usage['ONLINE_USERS'] = intval($output[0]);
+	// }
+
+	// echo json_encode($system_usage);
+
+
+	// Execute the 'who' command to get a list of logged-in users
+	$output = [];
+	exec("who | awk '{print $1}'", $output, $returnVar);
+
 	// Check if the command executed successfully
 	if ($returnVar !== 0) {
-   
-	 //here we return error message
-	 $system_usage['ONLINE_USERS'] = "Error fetching SSH users.";
-	}else{
-   
-	 //here we return online ssh online users in the system
-	 $system_usage['ONLINE_USERS'] = intval($output[0]);
+		// Return error message if the command fails
+		$system_usage['ONLINE_USERS'] = "Error fetching SSH users.";
+	} else {
+		// Filter out system users or unnecessary entries (e.g., root or specific users)
+		// You can adjust this filter as needed to exclude non-SSH users
+		$filteredUsers = array_filter($output, function($user) {
+			// Example filter: exclude system or non-SSH users (e.g., 'root', 'someotheruser')
+			return !in_array($user, ['root', 'system', 'otheruser']);
+		});
+
+		// Remove duplicates from the list of users
+		$uniqueUsers = array_unique($filteredUsers);
+
+		// Return the list of unique logged-in users
+		$system_usage['ONLINE_USERS'] = array_values($uniqueUsers);
 	}
 
+	// Output the result as JSON
 	echo json_encode($system_usage);
+
 ?>
