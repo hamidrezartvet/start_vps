@@ -8,22 +8,20 @@
 	// Initialize the result array
 	$system_usage = [];
 	
-	// Get the total count of online users
-	$system_usage['ONLINE_USERS_COUNT'] = intval($totalOutput[0]);
-
 	// Execute the 'last' command to fetch the names of logged-in users
 	$userOutput = [];
 	exec("last | grep 'still logged in' | awk '{print $1}' | sort | uniq", $userOutput, $returnVar);
-
+	
+	// Check if the command executed successfully
 	if ($returnVar !== 0) {
 		// Return error message if the command fails
-		$system_usage['online_users_list'] = "Error fetching SSH user names.";
+		$system_usage['ONLINE_USERS_LIST'] = "Error fetching SSH user names.";
 	} else {
-		// Get the list of online SSH user names
-		$system_usage['online_users_list'] = $userOutput;
+		// Return the list of online SSH user names
+		$system_usage['ONLINE_USERS_LIST'] = $userOutput;
 	}
-
+	
 	// Output the result as JSON
-	echo json_encode($system_usage);
+	echo json_encode($system_usage);	
 	
 ?>
