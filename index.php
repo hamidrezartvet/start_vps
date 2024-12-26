@@ -49,20 +49,19 @@
 	$days  = $num;
 	$system_usage['UPTIME'] = 'days:'.$days;
 
+	
+	// Use 'who' to fetch interactive users
+	$interactiveOutput = [];
+	exec("who | awk '{print $1}'", $interactiveOutput);
 
-	// Execute the 'who' command to get a list of logged-in users
-	$output = [];
-	exec("who | awk '{print $1}'", $output, $returnVar);
+	// Use 'ss' to fetch established SSH connections and extract usernames
+	$vpnOutput = [];
+	exec("ss -tnep | grep ':22 ' | grep ESTAB | awk -F',' '/uid=/ {for (i=1; i<=NF; i++) if ($i ~ /^uid=/) print $i}' | cut -d'=' -f2 | xargs -n1 getent passwd | cut -d':' -f1", $vpnOutput);
 
-	// Check if the command executed successfully
-	if ($returnVar !== 0) {
-		// Return error message if the command fails
-		$system_usage['ONLINE_USERS'] = "Error fetching SSH user count.";
-	} else {
-		// Count the number of unique logged-in users
-		$uniqueUsers = array_unique($output);
-		$system_usage['ONLINE_USERS'] = count($uniqueUsers);
-	}
+	// Add to system usage
+	$system_usage['ONLINE_USERS'] = $vpnOutput;
+	$system_usage['TOTAL_SESSIONS'] = $totalSessions;
+
 
 	// Output the result as JSON
 	echo json_encode($system_usage);

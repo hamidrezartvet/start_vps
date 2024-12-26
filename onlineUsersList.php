@@ -5,16 +5,20 @@
 		exit();
 	}
 
-	// Initialize the result array
-	$system_usage = [];
+	$interactiveOutput = [];
+	exec("who | awk '{print $1}'", $interactiveOutput);
 	
-	// Execute the 'last' command to fetch the names of logged-in users
-	$userOutput = [];
-	exec("last | grep 'still logged in' | awk '{print $1}' | sort | uniq", $userOutput, $returnVar);
+	// Use 'ss' to fetch established SSH connections and extract usernames
+	$vpnOutput = [];
+	exec("ss -tnep | grep ':666 ' | grep ESTAB | awk '{print $6}' | cut -d'=' -f2", $vpnOutput);
 	
-	// Return the list of online SSH user names
-	$system_usage['ONLINE_USERS_LIST'] = $userOutput;
-
+	// Combine both outputs and deduplicate usernames
+	$allUsers = array_merge($interactiveOutput, $vpnOutput);
+	$uniqueUsers = array_unique($allUsers);
+	
+	// Count the unique active SSH users
+	$system_usage['ONLINE_USERS_LIST'] = count($uniqueUsers);
+	
 	// Output the result as JSON
 	echo json_encode($system_usage);	
 	
