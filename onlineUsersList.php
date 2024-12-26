@@ -12,15 +12,9 @@
 	$userOutput = [];
 	exec("last | grep 'still logged in' | awk '{print $1}' | sort | uniq", $userOutput, $returnVar);
 	
-	// Check if the command executed successfully
-	if ($returnVar !== 0) {
-		// Return error message if the command fails
-		$system_usage['ONLINE_USERS_LIST'] = "Error fetching SSH user names.";
-	} else {
-		// Return the list of online SSH user names
-		$system_usage['ONLINE_USERS_LIST'] = $userOutput;
-	}
-	
+	// Return the list of online SSH user names
+	$system_usage['ONLINE_USERS_LIST'] = $userOutput;
+
 	// Output the result as JSON
 	echo json_encode($system_usage);	
 	
