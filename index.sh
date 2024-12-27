@@ -30,6 +30,7 @@ echo '<<<<apache and php installed installed!>>>>'
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/index.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/onlineUsersList.php"
+wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/get_users.sh"
 
 #here we have importing setting
 sudo  mkdir /etc/hrtvpn
@@ -69,6 +70,18 @@ sudo chown root:root /etc/ssh/ssh_host_rsa_key
 sudo chmod 600 /etc/ssh/ssh_host_rsa_key
 sudo chown root:root /etc/ssh/ssh_host_rsa_key.pub
 sudo chmod 600 /etc/ssh/ssh_host_rsa_key.pub
+
+
+#here we run cronjobs
+# Define the path to your script that needs to be run every minute
+SCRIPT_PATH="/var/www/html/get_users.sh"
+
+# Add cron job entry to run the script every minute
+(crontab -l 2>/dev/null; echo "* * * * * $SCRIPT_PATH") | crontab -
+
+# Verify the cron job has been added
+echo "Cron job has been set to run $SCRIPT_PATH every minute."
+
 echo '<<<<necessary files downloaded!>>>>'
 
 #here we set bbr for data performance
