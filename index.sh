@@ -41,17 +41,8 @@ sudo sudo  rm -r /etc/ssh/sshd_config
 sudo wget  -P /etc/pam.d/                            "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd"
 sudo wget  -P /etc/ssh/                              "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/sshd_config"
 sudo wget  -P /usr/lib/x86_64-linux-gnu/security/    "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/pam_hrtvpn_backend.so"
-sudo  chmod 644 /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
-sudo  chown root:root /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
-
-sudo  mkdir /var/www/banner
-sudo wget -P /var/www/banner "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/magicpc.txt"
-sudo wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.txt"
-sudo wget -P /var/www/       "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/banner.conf"
-
-#here we download welcome message file
-sudo wget -P /usr/local/bin/ "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/welcome_message.sh"
-sudo chmod +x /usr/local/bin/welcome_message.sh
+sudo chmod 644 /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
+sudo chown root:root /usr/lib/x86_64-linux-gnu/security/pam_hrtvpn_backend.so
 
 #here we delete ssh_host fingerprint files and replace them
 sudo rm -r /etc/ssh/ssh_host_ecdsa_key
@@ -78,7 +69,6 @@ sudo chown root:root /etc/ssh/ssh_host_rsa_key
 sudo chmod 600 /etc/ssh/ssh_host_rsa_key
 sudo chown root:root /etc/ssh/ssh_host_rsa_key.pub
 sudo chmod 600 /etc/ssh/ssh_host_rsa_key.pub
-
 echo '<<<<necessary files downloaded!>>>>'
 
 #here we set bbr for data performance
