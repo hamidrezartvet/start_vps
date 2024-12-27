@@ -113,7 +113,7 @@ KexAlgorithms diffie-hellman-group14-sha256
 # no default banner path
 #Banner none
 #Match User "magicpc"
-Banner "/var/www/banner.txt"
+# Banner "/var/www/banner.txt"
 
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*
