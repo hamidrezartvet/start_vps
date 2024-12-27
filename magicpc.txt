@@ -1,4 +1,0 @@
-nano /var/www/banner/magicpc.txt:
-Hi dear, magicpc
-this is me :)
-have fun
