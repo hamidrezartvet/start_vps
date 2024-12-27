@@ -31,6 +31,7 @@ wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_v
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/check.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/onlineUsersList.php"
 wget  -P /var/www/html "https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/get_users.sh"
+chmod +x /var/www/html/get_users.sh
 
 #here we have importing setting
 sudo  mkdir /etc/hrtvpn
