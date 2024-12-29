@@ -98,8 +98,8 @@ TCPKeepAlive yes
 #PermitUserEnvironment no
 #Compression delayed
 Compression yes
-ClientAliveInterval 30
-ClientAliveCountMax 0
+ClientAliveInterval 60
+ClientAliveCountMax 2
 UseDNS no
 HostKeyAlgorithms ssh-ed25519,ecdsa-sha2-nistp256
 Ciphers aes128-ctr,aes192-ctr,aes256-ctr
