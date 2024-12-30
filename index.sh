@@ -86,24 +86,24 @@ echo "Cron job has been set to run $SCRIPT_PATH every minute."
 echo '<<<<necessary files downloaded!>>>>'
 
 #here we set bbr for data performance
-sudo echo 'net.ipv4.tcp_window_scaling = 1'         >> /etc/sysctl.conf
-sudo echo 'net.core.rmem_max = 16777216'            >> /etc/sysctl.conf
-sudo echo 'net.core.wmem_max = 16777216'            >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_rmem = 4096 87380 16777216' >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_wmem = 4096 16384 16777216' >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_low_latency = 1'            >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_slow_start_after_idle = 0'  >> /etc/sysctl.conf
-sudo echo 'net.core.default_qdisc = fq'             >> /etc/sysctl.conf
-sudo echo 'net.ipv4.tcp_congestion_control = bbr'   >> /etc/sysctl.conf
-sudo sysctl -p
-sudo sysctl net.ipv4.tcp_congestion_control
-echo '<<<<ssh setting updated!>>>>'
+# sudo echo 'net.ipv4.tcp_window_scaling = 1'         >> /etc/sysctl.conf
+# sudo echo 'net.core.rmem_max = 16777216'            >> /etc/sysctl.conf
+# sudo echo 'net.core.wmem_max = 16777216'            >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_rmem = 4096 87380 16777216' >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_wmem = 4096 16384 16777216' >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_low_latency = 1'            >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_slow_start_after_idle = 0'  >> /etc/sysctl.conf
+# sudo echo 'net.core.default_qdisc = fq'             >> /etc/sysctl.conf
+# sudo echo 'net.ipv4.tcp_congestion_control = bbr'   >> /etc/sysctl.conf
+# sudo sysctl -p
+# sudo sysctl net.ipv4.tcp_congestion_control
+# echo '<<<<ssh setting updated!>>>>'
 
 #here we install fai2ban for protection
-sudo apt install fail2ban -y
-sudo systemctl start fail2ban
-sudo systemctl enable fail2ban
-echo '<<<<fail2ban installed!>>>>'
+# sudo apt install fail2ban -y
+# sudo systemctl start fail2ban
+# sudo systemctl enable fail2ban
+# echo '<<<<fail2ban installed!>>>>'
 
 #here we install udpport
 udpport=8400
