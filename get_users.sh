@@ -4,7 +4,7 @@
 terminal_users=$(who | awk '{print $1}')
 
 # Get PIDs of SSH VPN users connected on port 666
-ssh_pids=$(ss -tnp | grep ':666' | awk '{print $6}' | cut -d'=' -f2 | cut -d',' -f1)
+ssh_pids=$(ss -tnp | grep ':2024' | awk '{print $6}' | cut -d'=' -f2 | cut -d',' -f1)
 
 # Convert PIDs to usernames and preserve duplicates
 ssh_users=$(for pid in $ssh_pids; do ps -o user= -p "$pid"; done)
