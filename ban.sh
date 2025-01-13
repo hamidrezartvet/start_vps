@@ -1,70 +1,59 @@
 #!/bin/bash
 
-# Update and install required packages
-echo "Updating system and installing required tools..."
+# Update and install nftables
+echo "Updating system and installing nftables..."
 sudo apt update && sudo apt upgrade -y
-sudo apt install -y ipset iptables curl
+sudo apt install -y nftables curl
 
-# Define variables
+# Enable and start nftables service
+echo "Enabling nftables service..."
+sudo systemctl enable nftables
+sudo systemctl start nftables
+
+# Define variables for the IP list and nftables config
 IP_LIST_URL="https://raw.githubusercontent.com/hamidrezartvet/start_vps/master/i.txt"
 LOCAL_IP_LIST="/tmp/blocked_ips.txt"
-IPSET_NAME="blocked_ips"
+NFTABLES_CONFIG="/etc/nftables.conf"
 
 # Step 1: Download the IP list
-echo "Downloading the IP list from $IP_LIST_URL..."
+echo "Downloading the IP list..."
 curl -s "$IP_LIST_URL" -o "$LOCAL_IP_LIST"
 
-# Check if the IP list is valid
+# Check if the file was downloaded successfully
 if [ ! -s "$LOCAL_IP_LIST" ]; then
     echo "Failed to download IP list or the list is empty. Exiting."
     exit 1
 fi
 echo "Downloaded IP list with $(wc -l < "$LOCAL_IP_LIST") entries."
 
-# Step 2: Create or flush the ipset
-echo "Setting up ipset..."
-if sudo ipset list $IPSET_NAME > /dev/null 2>&1; then
-    sudo ipset flush $IPSET_NAME
-else
-    sudo ipset create $IPSET_NAME hash:ip hashsize=1024 maxelem=65536
-fi
+# Step 2: Generate nftables ruleset
+echo "Creating nftables ruleset..."
+sudo bash -c "cat > $NFTABLES_CONFIG" << 'EOF'
+table ip filter {
+    set blocked_ips {
+        type ipv4_addr
+        elements = {}
+    }
 
-# Step 3: Populate the ipset
-echo "Adding IPs to ipset..."
-while IFS= read -r ip; do
-    sudo ipset add $IPSET_NAME "$ip"
-done < "$LOCAL_IP_LIST"
-
-# Step 4: Apply iptables rules for blocking outgoing traffic
-echo "Applying iptables rules..."
-sudo iptables -C OUTPUT -m set --match-set $IPSET_NAME dst -p tcp --dport 80 -j DROP 2>/dev/null || \
-sudo iptables -A OUTPUT -m set --match-set $IPSET_NAME dst -p tcp --dport 80 -j DROP
-
-sudo iptables -C OUTPUT -m set --match-set $IPSET_NAME dst -p tcp --dport 443 -j DROP 2>/dev/null || \
-sudo iptables -A OUTPUT -m set --match-set $IPSET_NAME dst -p tcp --dport 443 -j DROP
-
-# Step 5: Save ipset and iptables rules persistently
-echo "Saving ipset and iptables rules..."
-sudo ipset save > /etc/ipset.rules
-sudo iptables-save > /etc/iptables/rules.v4
-
-# Step 6: Configure ipset to load on boot
-echo "Configuring ipset to load on boot..."
-sudo bash -c "cat > /etc/systemd/system/ipset-persistent.service" << 'EOF'
-[Unit]
-Description=Restore ipset rules
-After=network.target
-
-[Service]
-ExecStart=/sbin/ipset restore -f /etc/ipset.rules
-ExecReload=/sbin/ipset restore -f /etc/ipset.rules
-RemainAfterExit=yes
-
-[Install]
-WantedBy=multi-user.target
+    chain output {
+        type filter hook output priority 0; policy accept;
+        ip daddr @blocked_ips tcp dport { 80, 443 } drop
+    }
+}
 EOF
 
-sudo systemctl enable ipset-persistent.service
-sudo systemctl start ipset-persistent.service
+# Step 3: Populate the IP set in nftables
+echo "Populating blocked IPs into nftables..."
+# Convert IP list into nftables format
+IP_ELEMENTS=$(awk '{printf "\"%s\", ", $1}' "$LOCAL_IP_LIST" | sed 's/, $//')
+sudo nft add element ip filter blocked_ips { $IP_ELEMENTS }
 
-echo "Blocking outgoing traffic to IPs in the list is complete!"
+# Step 4: Save the nftables ruleset
+echo "Saving nftables ruleset..."
+sudo nft list ruleset > "$NFTABLES_CONFIG"
+
+# Step 5: Verify and display the ruleset
+echo "Displaying the current nftables rules:"
+sudo nft list ruleset
+
+echo "Blocking outgoing traffic to specified IPs is complete!"
